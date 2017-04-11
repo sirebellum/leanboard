@@ -1,6 +1,7 @@
 import spidev
 import RPi.GPIO as GPIO
-import time
+from time import sleep
+from LED_functions import *
 
 latch = 17
 
@@ -12,18 +13,20 @@ spi.open(0, 1)
 
 buffer = list(0x00 for x in range(0, 36))
 
+GPIO.output(latch, GPIO.HIGH)
+GPIO.output(latch, GPIO.LOW)
+for i in range(0, 36):
+    spi.xfer2([0x00])
+GPIO.output(latch, GPIO.HIGH)
+GPIO.output(latch, GPIO.LOW)
+
 try:
     while True:
         
-        buffer[0]|= 0xFF
-        buffer[1]|= 0xF0
-        buffer[18]|= 0xFF
-        buffer[19]|= 0xF0
-        
-        buffer[16]&= 0xF0
-        buffer[17]&= 0x00
-        buffer[34]&= 0xF0
-        buffer[35]&= 0x00
+        LED_On(0, buffer)
+        LED_On(11, buffer)
+        LED_Off(12, buffer)
+        LED_Off(23, buffer)
         
         for i in range(0, 36):
             spi.xfer2([buffer[i]])
@@ -31,18 +34,12 @@ try:
         GPIO.output(latch, GPIO.HIGH)
         GPIO.output(latch, GPIO.LOW)    
         
-        time.sleep(1)
+        sleep(1)
         
-        buffer[16]|= 0x0F
-        buffer[17]|= 0xFF
-        buffer[34]|= 0x0F
-        buffer[35]|= 0xFF
-        
-        buffer[0]&= 0x00
-        buffer[1]&= 0x0F
-        buffer[18]&= 0x00
-        buffer[19]&= 0x0F
-        
+        LED_Off(0, buffer)
+        LED_Off(11, buffer)
+        LED_On(12, buffer)
+        LED_On(23, buffer)
         
         for i in range(0, 36):
             spi.xfer2([buffer[i]])
@@ -50,7 +47,7 @@ try:
         GPIO.output(latch, GPIO.HIGH)
         GPIO.output(latch, GPIO.LOW)
         
-        time.sleep(1)
+        sleep(1)
             
 except KeyboardInterrupt:
     GPIO.cleanup()
