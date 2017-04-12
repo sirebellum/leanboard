@@ -1,5 +1,3 @@
-import spidev
-
 def LED_On(LED, buffer):
     
     if (LED % 2) == 0: #even
@@ -45,8 +43,3 @@ def LED_Toggle(LED, buffer):
         buffer[i]^= 0x0F
         buffer[i+1]^= 0xFF
         return i
-
-        
-def LED_write(buffer):
-    for i in range(0, 36):
-        spi.xfer2([buffer[i]])
