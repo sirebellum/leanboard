@@ -38,8 +38,7 @@ try:
         
         for i in range(0, 6):
             data = calcTime(timeDelta(getData(rooms[i])[1]))
-            print(data)
-            if data[0] > 0:
+            if data[0] >= 0:
                 room_state[i] = 0
             else: room_state[i] = 1
             
