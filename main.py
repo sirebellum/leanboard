@@ -11,8 +11,10 @@ room = sys.argv[1]
 #Determines which 7 segment display to address depending on room specified with command line arg
 if room == "Ballroom1":
     segment = SevenSegment.SevenSegment(address=0x70)
+    segment.set_invert(1)
 elif room == "Ballroom2":
     segment = SevenSegment.SevenSegment(address=0x71)
+    segment.set_invert(1)
 elif room == "Bexar":
     segment = SevenSegment.SevenSegment(address=0x72)    
 elif room == "Denman":
