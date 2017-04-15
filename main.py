@@ -24,10 +24,10 @@ elif room == "Travis":
 else:
     sys.exit("Room did not match an existing room!")
 
-init_Seg(segment)
-
 
 while True:
+
+    init_Seg(segment)
 
     data = getData(room)
     timestamp = data[0]
