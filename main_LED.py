@@ -31,7 +31,6 @@ GPIO.output(latch, GPIO.LOW)
 
 rooms = ("Ballroom1", "Ballroom2", "Bexar", "Denman", "Harris", "Travis")
 room_state = list(0 for x in range(0, 6))
-data = 0
 
 try:
     while True:
