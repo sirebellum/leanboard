@@ -23,6 +23,7 @@ elif room == "Harris":
     segment = SevenSegment.SevenSegment(address=0x74)
 elif room == "Travis":
     segment = SevenSegment.SevenSegment(address=0x75)
+    segment.set_invert(1)
 else:
     sys.exit("Room did not match an existing room!")
 
