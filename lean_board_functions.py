@@ -1,5 +1,21 @@
 ip = "localhost"
 
+from time import sleep
+
+#Initialization function designed to keep segments running even with occasional communication interruptions
+def init_Seg(segment):
+    try: segment.begin()
+    except IOError:
+        sleep(1)
+        init_Seg(segment)
+        
+def write_Seg(segment):
+    try: segment.write_display()
+    except IOError:
+        init_Seg(segment)
+        write_Seg(segment)
+        
+
 #Sorts table by timestamp and pulls the datetime and timestamp of the most recent submission
 def getData(room):
 

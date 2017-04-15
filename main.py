@@ -24,8 +24,7 @@ elif room == "Travis":
 else:
     sys.exit("Room did not match an existing room!")
 
-segment.begin()
-
+init_Seg(segment)
 
 
 while True:
@@ -47,7 +46,7 @@ while True:
         segment.set_digit(1, "E")
         segment.set_digit(2, "-")
         segment.set_digit(3, "1")
-        segment.write_display()
+        write_Seg(segment)
         hours = 0     #Ensures while loop never starts
         minutes = 0
         seconds = 0
@@ -83,7 +82,7 @@ while True:
             segment.set_digit(1, "E")
             segment.set_digit(2, "9")
             segment.set_digit(3, "9")
-            segment.write_display()
+            write_Seg(segment)
 
         elif (hours != 0 and hours <= 99):
             segment.clear()
@@ -92,7 +91,7 @@ while True:
             segment.set_digit(2, minutes_string[0])
             segment.set_digit(3, minutes_string[1])
             segment.set_colon(now.second % 2)
-            segment.write_display()
+            write_Seg(segment)
         
         elif hours == 0:
             segment.clear()
@@ -101,7 +100,7 @@ while True:
             segment.set_digit(2, seconds_string[0])
             segment.set_digit(3, seconds_string[1])
             segment.set_colon(1)
-            segment.write_display()
+            write_Seg(segment)
     
     
 #Exit if newer timestamp detected
@@ -111,7 +110,7 @@ while True:
             segment.set_digit(1, "0")
             segment.set_digit(2, "0")
             segment.set_digit(3, "0")
-            segment.write_display()
+            write_Seg(segment)
             break
     
         ti.sleep(1)
