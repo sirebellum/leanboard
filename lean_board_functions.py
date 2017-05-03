@@ -1,13 +1,26 @@
 ip = "localhost"
 
 from time import sleep
+import sys
 
 #Initialization function designed to keep segments running even with occasional communication interruptions
-def init_Seg(segment):
+def init_S(segment, trys):
     try: segment.begin()
     except IOError:
+	trys = trys + 1
+	if trys == 10: sys.exit("Too many reconnection attemps!")
+	sleep(1)
+
+	init_S(segment, trys)
+
+def init_Seg(segment):
+    trys = 0
+    try: segment.begin()
+    except IOError:
+	trys = trys + 1
         sleep(1)
-        init_Seg(segment)
+	
+        init_S(segment, trys)
         
 def write_Seg(segment):
     try: segment.write_display()
