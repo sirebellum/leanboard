@@ -1,4 +1,4 @@
-#23 - LED because SPI LED controller takes most significant LED data first. Serves to reverse the order of data sent to correctly match up buffer index with LED numbers on board
+#"23 - LED" because SPI LED controller takes most significant LED data first. Serves to reverse the order of data sent to correctly match up buffer index with LED numbers on board
 
 def LED_On(LED, buffer):
     

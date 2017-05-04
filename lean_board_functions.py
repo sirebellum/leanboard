@@ -5,19 +5,20 @@ import sys
 
 #Initialization function designed to keep segments running even with occasional communication interruptions
 def init_S(segment, trys):
-    try: segment.begin()
+    try:
+	segment.begin()
+	print "Attempted", trys, "reconnections"
     except IOError:
 	trys = trys + 1
-	if trys == 10: sys.exit("Too many reconnection attemps!")
+	if trys == 120: sys.exit("Too many reconnection attemps!")
 	sleep(1)
 
 	init_S(segment, trys)
 
 def init_Seg(segment):
-    trys = 0
     try: segment.begin()
     except IOError:
-	trys = trys + 1
+	trys = 1
         sleep(1)
 	
         init_S(segment, trys)
